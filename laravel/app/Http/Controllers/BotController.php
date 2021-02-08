@@ -86,8 +86,8 @@ class BotController extends Controller
                             Cache::get('desc'),
                             Cache::get('url')
                         );
-                        Cache::forever('conversation', null);
                         $this->saySomething('広告作成完了');
+                        Cache::forever('conversation', null);
                         break;
                 }
                 break;
