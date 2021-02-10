@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Log;
 use LINE\LINEBot\Constant\ActionType;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
-
 use App\Service\Line\Message\YesNo;
 use Illuminate\Support\Facades\Cache;
-
 use App\Service\GoogleAd\AddCampaigns;
 use App\Service\GoogleAd\AddAdGroups;
 use App\Service\GoogleAd\AddExpandedTextAds;
+use Log;
 
 class BotController extends Controller
 {
@@ -34,7 +32,6 @@ class BotController extends Controller
     public function webhook(Request $request)
     {
         $input = $request->all();
-        Log::info($input);
         // ユーザーがどういう操作を行った処理なのかを取得
         $type  = $input['events'][0]['type'];
         $this->replyToken  = $input['events'][0]['replyToken'];

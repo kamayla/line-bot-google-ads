@@ -25,20 +25,7 @@ class AddExpandedTextAds
         string $description,
         string $url
     ) {
-        // Generate a refreshable OAuth2 credential for authentication.
-        $oAuth2Credential = (new OAuth2TokenBuilder())
-            ->withClientId(env('GOOGLE_ADS_CLIENT_ID'))
-            ->withClientSecret(env('GOOGLE_ADS_CLIENT_SECRET'))
-            ->withRefreshToken(env('GOOGLE_ADS_REFRESH_TOKEN'))
-            ->build();
-
-        // Construct a Google Ads client configured from a properties file and the OAuth2 credentials above.
-        $googleAdsClient = (new GoogleAdsClientBuilder())
-            ->withDeveloperToken(env('GOOGLE_ADS_DEVELOPER_TOKEN'))
-            ->withOAuth2Credential($oAuth2Credential)
-            ->withLoginCustomerId(env('GOOGLE_ADS_MANAGER_ID'))
-            ->build();
-
+        $googleAdsClient = app(GetGoogleClient::class)->getClient();
         try {
             self::runExample(
                 $googleAdsClient,
